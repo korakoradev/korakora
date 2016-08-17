@@ -1,0 +1,91 @@
+<p>This is the vocabulary view.</p>
+
+<div class="container">
+
+  <div class="row ">
+    <p>Mode: {{ vocabulary.mode }}</p>
+    <p>Test Text: {{ vocabulary.testText }}</p>
+  </div>
+
+  <div class="row ">
+    <div class="col-sm-2 col-xs-2 "><label>{{vocabulary.fromLabel}}</label></div>
+    <div class="col-sm-10 col-xs-10 "><input class="form-control col-sm-11 col-xs-11" id="from"></div>
+  </div>
+
+  <div class="row ">
+    <div class="col-sm-2 col-xs-2 "><label>{{vocabulary.toLabel}}</label></div>
+    <div class="col-sm-10 col-xs-10 "><input class="form-control col-sm-11 col-xs-11" id="to"></div>
+  </div>
+
+  <div class="row ">
+    <div class="col-sm-2 col-xs-2 "><label>Id:</label></div>
+    <div class="col-sm-3 col-xs-3 "><input class="form-control col-sm-2 col-xs-2" id="id"></div>
+    <div class="col-sm-3 col-xs-3"><label>Insertion date: </label></div>
+    <div class="col-sm-4 col-xs-4"><input class="form-control" id="insertion_date"></div>
+  </div>
+
+  <div class="col-sm-12 col-xs-12" style="height:20px;"></div>
+
+  <div class="row">
+    <div class="col-sm-3 col-xs-3"><button type="button" class="btn btn-primary  btn-block" ng-click="vocabulary.next()">Next</button></div>
+    <div class="col-sm-3 col-xs-3"><button type="button" class="btn btn-warning  btn-block" ng-click="vocabulary.check()">Check</button></div>
+    <div class="col-sm-3 col-xs-3"><button type="button" class="btn btn-success  btn-block" ng-click="vocabulary.correct()">Yap</button></div>
+    <div class="col-sm-3 col-xs-3"><button type="button" class="btn btn-danger   btn-block" ng-click="vocabulary.wrong()">Nope</button></div>
+  </div>
+
+  <div class="col-sm-12 col-xs-12" style="height:30px;"></div>
+
+  <div class="row">
+    <div class="col-sm-2 col-xs-2"><label id="minID">Min ID:</label></div>
+    <div class="col-sm-4 col-xs-4"><output for="min_id_fader" id="minIDValue">0</output></div>
+    <div class="col-sm-2 col-xs-2"><label id="maxID">Max ID:</label></div>
+    <div class="col-sm-4 col-xs-4"><output for="max_id_fader" id="maxIDValue">2000</output></div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6 col-xs-6"><input type="range" name="min_id_fader" id="min_id_fader" value="0" min="0" max="2000" oninput="minIDFaderUpdate(value)" step="1"></div>
+    <div class="col-sm-6 col-xs-6"><input type="range" name="max_id_fader" id="max_id_fader" value="2000" min="0" max="2000" oninput="maxIDFaderUpdate(value)" step="1"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-2 col-xs-2"><label id="maxRatio">Max Ratio:</label></div>
+    <div class="col-sm-4 col-xs-4"><output for="max_ratio_fader" id="maxRatioValue">100</output></div>
+    <div class="col-sm-2 col-xs-2"><label id="minVisits">Min Visits:</label></div>
+    <div class="col-sm-4 col-xs-4"><output for="min_visits_fader" id="minVisitsValue">0</output></div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6 col-xs-6"><input type="range" name="max_ratio_fader" id="max_ratio_fader" value="100" min="0" max="100" oninput="maxRatioFaderUpdate(value)" step="1"></div>
+    <div class="col-sm-6 col-xs-6"><input type="range" name="min_visits_fader" id="min_visits_fader" value="0" min="0" max="10" oninput="minVisitsFaderUpdate(value)" step="1"></div>
+  </div>
+
+  <div class="col-sm-12 col-xs-12" style="height:30px;"></div>
+  <div class="col-sm-12 col-xs-12" style="height:30px;"></div>
+
+  <div class="row">
+    <div class="col-sm-2 col-xs-2"><label>Statistics: </label></div>
+    <div class="col-sm-2 col-xs-2"><label id="statistics" style="width:400px">0/0</label></div>
+    <div class="col-sm-4 col-xs-4"><label id="total">aaa</label></div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3 col-xs-3"><label class="checkbox-inline"><input type="checkbox" value="1" id="new_words" onchange="window.setNewWordsChecked()">Only New Words</label></div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-3 col-xs-3"><label>Add New Word: </label></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3 col-xs-3"><label>English: </label></div>
+    <div class="col-sm-9 col-xs-9"><input class="form-control" id="new_eng""></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3 col-xs-3"><label>Hebrew: </label></div>
+    <div class="col-sm-9 col-xs-9"><input class="form-control" id="new_heb""></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3 col-xs-3"><button type="button" class="btn btn-default  btn-block" onclick="window.addNewWord()">Add</button></div>
+  </div>
+
+</div>
