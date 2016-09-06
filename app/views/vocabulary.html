@@ -1,91 +1,94 @@
-<p>This is the vocabulary view.</p>
 
 <div class="container">
 
-  <div class="row ">
-    <p>Mode: {{ vocabulary.mode }}</p>
-    <p>Test Text: {{ vocabulary.testText }}</p>
-  </div>
-
-  <div class="row ">
-    <div class="col-sm-2 col-xs-2 "><label>{{vocabulary.fromLabel}}</label></div>
-    <div class="col-sm-10 col-xs-10 "><input class="form-control col-sm-11 col-xs-11" id="from"></div>
-  </div>
-
-  <div class="row ">
-    <div class="col-sm-2 col-xs-2 "><label>{{vocabulary.toLabel}}</label></div>
-    <div class="col-sm-10 col-xs-10 "><input class="form-control col-sm-11 col-xs-11" id="to"></div>
-  </div>
-
-  <div class="row ">
-    <div class="col-sm-2 col-xs-2 "><label>Id:</label></div>
-    <div class="col-sm-3 col-xs-3 "><input class="form-control col-sm-2 col-xs-2" id="id"></div>
-    <div class="col-sm-3 col-xs-3"><label>Insertion date: </label></div>
-    <div class="col-sm-4 col-xs-4"><input class="form-control" id="insertion_date"></div>
+  <div class="row border">
+    <div class="col-sm-2 col-xs-2 "><label><input type="radio" ng-model="status.mode" value="En2He" ng-change='modeChange(status.mode)'>En2He</label></div>
+    <div class="col-sm-3 col-xs-3 "><label><input type="radio" ng-model="status.mode" value="He2En" ng-change='modeChange(status.mode)'>He2En</label></div>
   </div>
 
   <div class="col-sm-12 col-xs-12" style="height:20px;"></div>
 
+  <div class="row top1">
+    <div class="row">
+      <div class="col-sm-2 col-xs-2 "><label>{{status.from_label}} (#{{status.id}})</label></div>
+      <div class="col-sm-10 col-xs-10 "><input class="form-control col-sm-11 col-xs-11 ratio{{status.ratio_class}}" id="from" ng-model=status.from_text></div>
+    </div>
+
+    <div class="row top1">
+      <div class="col-sm-2 col-xs-2 "><label>{{status.to_label}} ({{status.pass}}/{{status.visit}})</label></div>
+      <div class="col-sm-10 col-xs-10 "><input class="form-control col-sm-11 col-xs-11" id="to" ng-model=status.to_text></div>
+    </div>
+
+    <div class="row top2">
+      <div class="col-sm-2 col-xs-2 "><label>Total: {{status.total}}</label></div>
+      <div class="col-sm-6 col-xs-6"><label>Insertion date: </label>{{status.date}}</div>
+    </div>
+
+  </div>
+
+
+  <div class="col-sm-12 col-xs-12" style="height:20px;"></div>
+
   <div class="row">
-    <div class="col-sm-3 col-xs-3"><button type="button" class="btn btn-primary  btn-block" ng-click="vocabulary.next()">Next</button></div>
-    <div class="col-sm-3 col-xs-3"><button type="button" class="btn btn-warning  btn-block" ng-click="vocabulary.check()">Check</button></div>
-    <div class="col-sm-3 col-xs-3"><button type="button" class="btn btn-success  btn-block" ng-click="vocabulary.correct()">Yap</button></div>
-    <div class="col-sm-3 col-xs-3"><button type="button" class="btn btn-danger   btn-block" ng-click="vocabulary.wrong()">Nope</button></div>
+    <div class="row">
+      <div class="col-sm-3 col-xs-3"><button type="button" class="btn btn-primary  btn-block" ng-click="next()">Next</button></div>
+      <div class="col-sm-3 col-xs-3"><button type="button" class="btn btn-warning  btn-block" ng-click="check()">Check</button></div>
+      <div class="col-sm-3 col-xs-3"><button type="button" class="btn btn-success  btn-block" ng-click="correct()">Yap</button></div>
+      <div class="col-sm-3 col-xs-3"><button type="button" class="btn btn-danger   btn-block" ng-click="wrong()">Nope</button></div>
+    </div>
+    <div class="col-sm-12 col-xs-12" style="height:20px;"></div>
+  </div>
+
+  <div class="col-sm-12 col-xs-12" style="height:20px;"></div>
+
+  <div class="row border">
+    <div class="row">
+      <div class="col-sm-2 col-xs-2"><label id="minID">Min ID:</label></div>
+      <div class="col-sm-4 col-xs-4"><label id="minIDValue">{{status.min_id}}</div>
+      <div class="col-sm-2 col-xs-2"><label id="maxID">Max ID:</label></div>
+      <div class="col-sm-4 col-xs-4"><label id="maxIDValue">{{status.max_id}}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6 col-xs-6"><input type="range" name="min_id_fader" id="min_id_fader" min="0" max="2000" ng-model=status.min_id step="1"></div>
+      <div class="col-sm-6 col-xs-6"><input type="range" name="max_id_fader" id="max_id_fader" min="0" max="2000" ng-model=status.max_id step="1"></div>
+    </div>
+
+    <div class="row top4">
+      <div class="col-sm-2 col-xs-2"><label id="maxRatio">Max Ratio:</label></div>
+      <div class="col-sm-4 col-xs-4"><label id="maxRatioValue">{{status.max_ratio}}</div>
+      <div class="col-sm-2 col-xs-2"><label id="minVisits">Min Visits:</label></div>
+      <div class="col-sm-4 col-xs-4"><label id="minVisitsValue">{{status.min_visits}}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6 col-xs-6"><input type="range" name="max_ratio_fader" id="max_ratio_fader" value="100" min="0" max="100" ng-model=status.max_ratio step="1"></div>
+      <div class="col-sm-6 col-xs-6"><input type="range" name="min_visits_fader" id="min_visits_fader" value="0" min="0" max="10"  ng-model=status.min_visits step="1"></div>
+    </div>
+
+    <div class="row top2">
+      <div class="col-sm-3 col-xs-3"><label class="checkbox-inline"><input type="checkbox" value="1" id="new_words" ng-model='status.new_words_checked' ng-change="setNewWordsChecked()">Only New Words</label></div>
+    </div>
   </div>
 
   <div class="col-sm-12 col-xs-12" style="height:30px;"></div>
 
-  <div class="row">
-    <div class="col-sm-2 col-xs-2"><label id="minID">Min ID:</label></div>
-    <div class="col-sm-4 col-xs-4"><output for="min_id_fader" id="minIDValue">0</output></div>
-    <div class="col-sm-2 col-xs-2"><label id="maxID">Max ID:</label></div>
-    <div class="col-sm-4 col-xs-4"><output for="max_id_fader" id="maxIDValue">2000</output></div>
-  </div>
 
-  <div class="row">
-    <div class="col-sm-6 col-xs-6"><input type="range" name="min_id_fader" id="min_id_fader" value="0" min="0" max="2000" oninput="minIDFaderUpdate(value)" step="1"></div>
-    <div class="col-sm-6 col-xs-6"><input type="range" name="max_id_fader" id="max_id_fader" value="2000" min="0" max="2000" oninput="maxIDFaderUpdate(value)" step="1"></div>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-2 col-xs-2"><label id="maxRatio">Max Ratio:</label></div>
-    <div class="col-sm-4 col-xs-4"><output for="max_ratio_fader" id="maxRatioValue">100</output></div>
-    <div class="col-sm-2 col-xs-2"><label id="minVisits">Min Visits:</label></div>
-    <div class="col-sm-4 col-xs-4"><output for="min_visits_fader" id="minVisitsValue">0</output></div>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-6 col-xs-6"><input type="range" name="max_ratio_fader" id="max_ratio_fader" value="100" min="0" max="100" oninput="maxRatioFaderUpdate(value)" step="1"></div>
-    <div class="col-sm-6 col-xs-6"><input type="range" name="min_visits_fader" id="min_visits_fader" value="0" min="0" max="10" oninput="minVisitsFaderUpdate(value)" step="1"></div>
-  </div>
-
-  <div class="col-sm-12 col-xs-12" style="height:30px;"></div>
-  <div class="col-sm-12 col-xs-12" style="height:30px;"></div>
-
-  <div class="row">
-    <div class="col-sm-2 col-xs-2"><label>Statistics: </label></div>
-    <div class="col-sm-2 col-xs-2"><label id="statistics" style="width:400px">0/0</label></div>
-    <div class="col-sm-4 col-xs-4"><label id="total">aaa</label></div>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-3 col-xs-3"><label class="checkbox-inline"><input type="checkbox" value="1" id="new_words" onchange="window.setNewWordsChecked()">Only New Words</label></div>
-  </div>
-
-
-  <div class="row">
-    <div class="col-sm-3 col-xs-3"><label>Add New Word: </label></div>
-  </div>
-  <div class="row">
-    <div class="col-sm-3 col-xs-3"><label>English: </label></div>
-    <div class="col-sm-9 col-xs-9"><input class="form-control" id="new_eng""></div>
-  </div>
-  <div class="row">
-    <div class="col-sm-3 col-xs-3"><label>Hebrew: </label></div>
-    <div class="col-sm-9 col-xs-9"><input class="form-control" id="new_heb""></div>
-  </div>
-  <div class="row">
-    <div class="col-sm-3 col-xs-3"><button type="button" class="btn btn-default  btn-block" onclick="window.addNewWord()">Add</button></div>
+  <div class="row border top4">
+    <div class="row">
+      <div class="col-sm-3 col-xs-3"><label>Add New Word</label></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3 col-xs-3"><label>English: </label></div>
+      <div class="col-sm-9 col-xs-9"><input class="form-control" id="new_eng" ng-model="status.new_word_english"></div>
+    </div>
+    <div class="row top1">
+      <div class="col-sm-3 col-xs-3"><label>Hebrew: </label></div>
+      <div class="col-sm-9 col-xs-9"><input class="form-control" id="new_heb" ng-model="status.new_word_hebrew"></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3 col-xs-3"><button type="button" class="btn btn-default btn-block" ng-click="addNewWord()">Add</button></div>
+    </div>
   </div>
 
 </div>

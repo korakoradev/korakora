@@ -81,3 +81,53 @@ body {
     border-bottom: 0;
   }
 }
+
+.border {
+    border: 1px solid;
+    border-radius: 8px;
+    margin: 0px;
+    padding: 5px;
+    border-color: #dddddd #dddddd;
+}
+
+.top1 {
+  margin-top: 2px;
+}
+
+.top2 {
+  margin-top: 5px;
+}
+
+.top3 {
+  margin-top: 10px;
+}
+
+.top4 {
+  margin-top: 15px;
+}
+
+
+.ratio0 {
+  background-color: #FF3030
+}
+
+.ratio1 {
+  background-color: #EE6AA7
+}
+
+.ratio2 {
+  background-color: #EEEE00
+}
+
+.ratio3 {
+  background-color: #ADFF2F
+}
+
+.ratio4 {
+  background-color: #ADFF2F
+}
+
+.ratio5 {
+  background-color: #7CFC00
+}
+
